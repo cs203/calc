@@ -1,18 +1,16 @@
 cc = clang++ -std=c++2b
 
-calc: calc.o symtab.o store.o
+test: test.o scan.o 
 	$(cc) -o $@  $^
 
-calc.o: calc.cpp symtab.h
+test.o: test.cpp  scan.h
 	$(cc) -c $<
 
-symtab.o: symtab.cpp symtab.h
-	$(cc) -c $<
 	
-store.o: store.cpp store.h symtab.h
+scan.o: scan.cpp scan.h 
 	$(cc) -c $<
 run: 
-	./calc
+	./test
 
 clean: 
 	rm -f *.o calc

@@ -35,16 +35,9 @@ private:
 	int _size;
 };
 
-constexpr int idNotFound = -1;
-
 struct SymbolTable
 {
 	SymbolTable(int size);
-	~SymbolTable();
-	int ForceAdd(char const *str, int len);
-	int Find(char const *str, int len) const;
-	char const * GetString(int id) const;
-
 private:
 	HTable _htab;
 	const int _size;

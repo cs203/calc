@@ -8,9 +8,10 @@ calc.o: calc.cpp symtab.h
 
 symtab.o: symtab.cpp symtab.h
 	$(cc) -c $<
-	
+
 store.o: store.cpp store.h symtab.h
 	$(cc) -c $<
+	
 run: 
 	./calc
 

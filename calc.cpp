@@ -1,20 +1,14 @@
 #include<iostream>
 #include"symtab.h"
+#include"store.h"
 const int maxBuf = 100;
 const int maxSymbols = 40;
 
 int main()
 {
-	char buf[maxBuf];
-	SymbolTable symTab;
-	Store store(maxSymbols, symTab);
-	do
-	{
-		std::cout << "> ";
-		std::getline(buf,maxBuf); 
-		Scanner scanner(buf);
-		Parser parser(scanner, store,  symTab);
-		status = status.Eval();
-	}while(status != stQuit);
-}
+	SymbolTable symTab{maxSymbols};
+	Store store{maxSymbols, symTab};
+	int id = symTab.Find("pi", 2);
+	std::cout << store.Value(id) << std::endl;
 
+}

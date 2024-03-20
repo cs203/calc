@@ -13,6 +13,7 @@ struct SymbolTable;
 struct Parser
 {
 	Parse(Scanner &scanner, Store &store, SymbolTable &symTab);
+	Node *Parse();
 	Status Eval();
 private:
 	Scanner &_scanner;

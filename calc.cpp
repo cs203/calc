@@ -1,20 +1,19 @@
 #include<iostream>
-#include"symtab.h"
+#include"tree.h"
+#include"store.h"
 const int maxBuf = 100;
 const int maxSymbols = 40;
 
 int main()
 {
-	char buf[maxBuf];
-	SymbolTable symTab;
-	Store store(maxSymbols, symTab);
-	do
-	{
-		std::cout << "> ";
-		std::getline(buf,maxBuf); 
-		Scanner scanner(buf);
-		Parser parser(scanner, store,  symTab);
-		status = status.Eval();
-	}while(status != stQuit);
+	NumNode *pn{new NumNode{3.14}};
+	UMinusNode mn{pn};
+	Store store;
+	VarNode * pv{new VarNode{3, store}};
+	pv->Assign(25);
+	std::cout << pv->Calc() << std::endl;
+	if(pv->IsLvalue())
+		std::cout << "ok it is variable\n";
+
 }
 

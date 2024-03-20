@@ -1,16 +1,14 @@
 cc = clang++ -std=c++2b
 
-calc: calc.o symtab.o store.o
+calc: calc.o tree.o
 	$(cc) -o $@  $^
 
-calc.o: calc.cpp symtab.h
+calc.o: calc.cpp tree.h
 	$(cc) -c $<
 
-symtab.o: symtab.cpp symtab.h
+tree.o: tree.cpp tree.h store.h
 	$(cc) -c $<
 	
-store.o: store.cpp store.h symtab.h
-	$(cc) -c $<
 run: 
 	./calc
 

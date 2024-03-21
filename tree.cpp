@@ -55,4 +55,59 @@ double VarNode::Calc() const
 	return x;
 }
 
+BinNode::BinNode(Node *pLeft, Node *pRight)
+	:_pLeft{pLeft}, _pRight{pRight}
+{}
 
+BinNode::~BinNode()
+{
+	delete _pLeft;
+	delete _pRight;
+}
+
+AddNode::AddNode(Node *pLeft, Node *pRight)
+	:BinNode(pLeft, pRight){}
+
+double AddNode::Calc() const 
+{
+	return _pLeft->Calc() + _pRight->Calc();
+}
+
+
+SubNode::SubNode(Node *pLeft, Node *pRight)
+	:BinNode(pLeft, pRight)
+{}
+
+double SubNode::Calc() const 
+{
+	return _pLeft->Calc() - _pRight->Calc();
+}
+
+MultNode::MultNode(Node *pLeft, Node *pRight)
+	:BinNode(pLeft, pRight)
+{}
+
+double MultNode::Calc() const 
+{
+	return _pLeft->Calc() * _pRight->Calc();
+}
+
+DivideNode::DivideNode(Node *pLeft, Node *pRight)
+	:BinNode(pLeft, pRight)
+{}
+
+double DivideNode::Calc() const 
+{
+	return _pLeft->Calc() / _pRight->Calc();
+}
+
+AssignNode::AssignNode(Node *pLeft, Node *pRight)
+	:BinNode(pLeft, pRight)
+{}
+
+double AssignNode::Calc() const 
+{
+	double x = _pRight->Calc();
+	_pLeft->Assign(x);
+	return x;
+}

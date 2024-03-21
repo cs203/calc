@@ -38,4 +38,46 @@ private:
 	Store &_store;
 };
 
+struct BinNode: public Node
+{
+	BinNode(Node *pLeft, Node *pRight);
+	~BinNode();
+protected:
+	Node *const _pLeft;
+	Node *const _pRight;
+};
+
+struct AddNode: public BinNode
+{
+	AddNode(Node *pLeft, Node *pRight);
+	double Calc() const override;
+};
+
+
+struct SubNode: public BinNode
+{
+	SubNode(Node *pLeft, Node *pRight);
+	double Calc() const override;
+};
+
+
+struct MultNode: public BinNode
+{ 
+	MultNode(Node *pLeft, Node *pRight);
+	double Calc() const override;
+};
+
+struct DivideNode: public BinNode
+{ 
+	DivideNode(Node *pLeft, Node *pRight);
+	double Calc() const override;
+};
+
+
+struct AssignNode: public BinNode
+{
+	AssignNode(Node *pLeft, Node *pRight);
+	double Calc() const override;
+	
+};
 #endif

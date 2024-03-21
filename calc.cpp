@@ -6,14 +6,12 @@ const int maxSymbols = 40;
 
 int main()
 {
-	NumNode *pn{new NumNode{3.14}};
-	UMinusNode mn{pn};
+	Node *pn{new NumNode{3.14}};
+	Node *pmn{new UMinusNode{pn}};
 	Store store;
-	VarNode * pv{new VarNode{3, store}};
-	pv->Assign(25);
-	std::cout << pv->Calc() << std::endl;
-	if(pv->IsLvalue())
-		std::cout << "ok it is variable\n";
-
+	Node *pv{new VarNode{3, store}};
+	Node *pa{new AssignNode(pv, pmn)};
+	Node *padd{new DivideNode(pn, pn)};
+	std::cout << padd->Calc() << std::endl;
 }
 

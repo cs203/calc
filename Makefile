@@ -1,4 +1,4 @@
-cc = clang++ -std=c++2b
+cc = clang++ -std=c++2b -g
 
 calc: calc.o symtab.o store.o scan.o tree.o parser.o
 	$(cc) -o $@  $^

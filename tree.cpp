@@ -31,7 +31,7 @@ double UMinusNode::Calc() const
 	return -_pNode->Calc();
 }
 
-VarNode::VarNode(int id, Store store)
+VarNode::VarNode(int id, Store &store)
 	:_id{id}, _store{store}
 {}
 

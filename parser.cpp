@@ -1,9 +1,11 @@
 #include"parser.h"
 #include"symtab.h"
-#include"stroe.h"
+#include"store.h"
 #include"tree.h"
+#include"scan.h"
+#include<iostream>
 
-Parser::Parse(Scanner &scanner, Store &store, SymbolTable &symTab)
+Parser::Parser(Scanner &scanner, Store &store, SymbolTable &symTab)
 	:_scanner{scanner}, _store{store}, _symTab{symTab}, _pTree{nullptr}, _status{stOk}
 {}
 
@@ -22,12 +24,12 @@ Status Parser::Eval()
 	return _status;
 }
 
-void Parser::Exectue()
+void Parser::Execute()
 {
-	if(_Tree)
+	if(_pTree)
 	{ 
 		double result = _pTree->Calc(); 
-		std::cout <<"> " <<  result;
+		std::cout <<"	" <<  result << std::endl;
 	}
 }
 
@@ -74,7 +76,7 @@ Node* Parser::Term()
 {
 	Node * pNode = Factor();
 	EToken token = _scanner.Token();
-	it(token == tMult)
+	if(token == tMult)
 	{
 		_scanner.Accept();
 		Node *pRight = Term();
@@ -96,12 +98,12 @@ Node *Parser::Factor()
 	if(token == tLParen)
 	{
 		_scanner.Accept();
-		pNode = Exrpr();
+		pNode = Expr();
 		if(_scanner.Token() != tRParen)
 			_status = stError;
 		_scanner.Accept();
 	}
-	else if(toekn == tNumber)
+	else if(token == tNumber)
 	{
 		pNode = new NumNode(_scanner.Number());
 		_scanner.Accept();
@@ -109,7 +111,7 @@ Node *Parser::Factor()
 	else if(token == tIdent)
 	{
 		char strSymbol[maxSymLen];
-		int senSym = maxSymLen;
+		int lenSym = maxSymLen;
 		_scanner.GetSymbolName(strSymbol, lenSym);
 		int id = _symTab.Find(strSymbol, lenSym);
 		_scanner.Accept();

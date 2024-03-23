@@ -18,7 +18,7 @@ tree.o: tree.cpp tree.h
 scan.o: scan.cpp scan.h
 	$(cc) -c $<
 
-parser.o: parser.cpp parsher.h scan.h tree.h symtab.h store.h
+parser.o: parser.cpp parser.h scan.h tree.h symtab.h store.h
 	$(cc) -c $<
 run: 
 	./calc

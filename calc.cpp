@@ -10,15 +10,16 @@ const int maxSymbols = 40;
 int main()
 {
 	char buf[maxBuf];
-	SymbolTable symTab;
+	SymbolTable symTab{maxSymbols};
 	Store store(maxSymbols, symTab);
+	Status status{stOk};
 	do
 	{
 		std::cout << "> ";
-		std::getline(buf,maxBuf); 
+		std::cin.getline(buf,maxBuf); 
 		Scanner scanner(buf);
 		Parser parser(scanner, store,  symTab);
-		status = status.Eval();
+		status = parser.Eval();
 	}while(status != stQuit);
 }
 

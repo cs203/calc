@@ -29,7 +29,7 @@ struct Store;
 
 struct VarNode: public Node
 {
-	VarNode(int id, Store store);
+	VarNode(int id, Store &store);
 	double Calc() const override;
 	bool IsLvalue() const override;
 	void Assign(double num) override;

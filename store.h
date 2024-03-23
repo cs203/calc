@@ -2,11 +2,11 @@
 #define store_h
 struct SymbolTable;
 
-enum unsigned char {stNotInit, stInit};
+enum {stNotInit, stInit};
 
 struct Store
 {
-	Store(int size, SymboleTable &symTab);
+	Store(int size, SymbolTable &symTab);
 private:
 	int _size;
 	double * _cells;

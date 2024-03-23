@@ -13,8 +13,8 @@ struct Node;
 
 struct Parser
 {
-	Parse(Scanner &scanner, Store &store, SymbolTable &symTab);
-	~Parse();
+	Parser(Scanner &scanner, Store &store, SymbolTable &symTab);
+	~Parser();
 	Status Eval();
 private:
 	void Parse();

@@ -1,5 +1,9 @@
 #include<iostream>
 #include"symtab.h"
+#include"parser.h"
+#include"store.h"
+#include"scan.h"
+
 const int maxBuf = 100;
 const int maxSymbols = 40;
 

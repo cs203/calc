@@ -18,16 +18,15 @@ struct Parser
 	Status Eval();
 private:
 	void Parse();
+	void Execute();
 	Node *Expr();
 	Node *Term();
 	Node *Factor();
-	void Execute();
 
-
-	Scanner &_scanner;
-	Store &_store;
-	Node *_pTree;
 	SymbolTable &_symTab;
+	Store &_store;
+	Scanner &_scanner;
+	Node *_pTree;
 	Status _status;
 };
 

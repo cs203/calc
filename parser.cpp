@@ -126,7 +126,7 @@ Node *Parser::Factor()
 		}
 		case tMinus: 
 		{ 
-			_kscanner.Accept(); 
+			_scanner.Accept(); 
 			pNode = new UMinusNode(Factor()); 
 			break;
 		}

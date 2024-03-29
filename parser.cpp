@@ -95,40 +95,48 @@ Node *Parser::Factor()
 {
 	Node *pNode;
 	EToken token = _scanner.Token();
-	if(token == tLParen)
+	switch(token)
 	{
-		_scanner.Accept();
-		pNode = Expr();
-		if(_scanner.Token() != tRParen)
-			_status = stError;
-		_scanner.Accept();
-	}
-	else if(token == tNumber)
-	{
-		pNode = new NumNode(_scanner.Number());
-		_scanner.Accept();
-	}
-	else if(token == tIdent)
-	{
-		char strSymbol[maxSymLen];
-		int lenSym = maxSymLen;
-		_scanner.GetSymbolName(strSymbol, lenSym);
-		int id = _symTab.Find(strSymbol, lenSym);
-		_scanner.Accept();
-		if(id == idNotFound)
-			id = _symTab.ForceAdd(strSymbol, lenSym);
-		pNode = new VarNode(id, _store);
-	}
-	else if(token == tMinus)
-	{
-		_scanner.Accept();
-		pNode = new UMinusNode(Factor());
-	}
-	else
-	{
-		_scanner.Accept();
-		_status = stError;
-		pNode = nullptr;
+		case tLParen: 
+		{ 
+			_scanner.Accept(); 
+			pNode = Expr(); 
+			if(_scanner.Token() != tRParen) 
+				_status = stError; 
+			_scanner.Accept(); 
+			break;
+		}
+		case tNumber: 
+		{ 
+			pNode = new NumNode(_scanner.Number()); 
+			_scanner.Accept(); 
+			break;
+		} 
+		case tIdent: 
+		{ 
+			char strSymbol[maxSymLen]; 
+			int lenSym = maxSymLen; 
+			_scanner.GetSymbolName(strSymbol, lenSym); 
+			int id = _symTab.Find(strSymbol, lenSym); 
+			_scanner.Accept(); 
+			if(id == idNotFound) 
+				id = _symTab.ForceAdd(strSymbol, lenSym); 
+			pNode = new VarNode(id, _store); 
+			break;
+		}
+		case tMinus: 
+		{ 
+			_kscanner.Accept(); 
+			pNode = new UMinusNode(Factor()); 
+			break;
+		}
+		default: 
+		{ 
+			_scanner.Accept(); 
+			_status = stError; 
+			pNode = nullptr; 
+			break;
+		}
 	}
 	return pNode;
 }
